@@ -1,26 +1,8 @@
 import React from 'react'
 
-function Register() {
+export function Register() {
   return (
     <div>
-      Register
+      <h1>Register Here</h1>
     </div>
-  )
-}
-function RegisterWithMassage() {
-    return (
-      <div>
-        Register with new user.
-      </div>
-    )
-  }
-  function RegisterWithEmail() {
-    return (
-      <div>
-        Register with new user.
-      </div>
-    )
-  }
-  export {RegisterWithMassage,RegisterWithEmail}
-
-export default Register
+)}
