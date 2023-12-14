@@ -2,12 +2,20 @@ import {useState} from 'react';
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 export const Login=() => {
   const name ='Login';
   const [email,setEmail] =useState('');
   const [pass,setPass] =useState('');
+
+  const handleLogin=()=>{
+    axios.get("http://localhost:8000").then((res) => {
+      console.log(res);
+      })
+
+  }  
   return (
     <div >
     <div className='bg-slate-800 border-slate-500 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative'>
@@ -28,15 +36,16 @@ export const Login=() => {
           <div className='flex justify-between items-center'>
           <div className='flex gap-2 items-center'>
             <input type="checkbox" />
-            <label htmlFor="" name="" id="">Remember me</label>
-              <span>Forget the Password?</span>
+            <label htmlFor="">Remember me</label>
               </div>
+              <Link to='Reset' className='text-blue-500'>Forget Password?</Link>
           </div>
-          <button type="submit">Login</button>
+          <button onClick={handleLogin} className='w-full mb-4 text-[18px] mt-6 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-emerald-800 opacity-60 hover:opacity-100 font-bold py-2 transition-colors duration-300' type="submit">Login</button>
           
         </section>
+        
         <div className="register-link">
-        <span>Don't have an account?</span><Link to='Register'>Register Here</Link>
+        <span className='m-4'>Don't have an account?</span><Link className='text-blue-600' to='Register'>Register Here</Link>
         </div>
         </div>
     </div>
