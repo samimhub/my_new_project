@@ -13,7 +13,7 @@ export function Register() {
     
     const handleRegister=()=>{
       axios.get("http://localhost:8000").then((res) => {
-            console.log(res);
+            console.log(res.userDatabase);
             })
 
     } 

@@ -12,7 +12,7 @@ export const Login=() => {
 
   const handleLogin=()=>{
     axios.get("http://localhost:8000").then((res) => {
-      console.log(res);
+      console.log(res.userDatabase);
       })
 
   }  
