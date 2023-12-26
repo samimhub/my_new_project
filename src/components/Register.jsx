@@ -2,7 +2,8 @@ import React from 'react'
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { useState } from 'react'
-import { Link } from 'react-router-dom';
+import { Link} from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 export function Register() {
@@ -10,13 +11,20 @@ export function Register() {
       const name ='Register';
       const [email,setEmail] =useState('');
       const [pass,setPass] =useState('');
+      const navigate  = useNavigate ();
     
-    const handleRegister=()=>{
-      axios.get("http://localhost:8000").then((res) => {
-            console.log(res.userDatabase);
-            })
-
-    } 
+      const handleRegister = async () => {
+       
+        axios.post('http://localhost:8000/register', {
+            email,
+            pass,
+          }).then(res =>{
+            alert(res.data.message)
+            navigate ('/login')
+          }).catch (error=> {
+            alert(error.response.data);
+          })
+      };
       return (
         <div >
         <div className='bg-slate-800 border-slate-500 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative'>

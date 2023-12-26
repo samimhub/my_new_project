@@ -1,11 +1,24 @@
 import {useState} from 'react';
 import { RiLockPasswordFill } from "react-icons/ri";
-import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function Reset() {
     const name ='Reset Password';
     const [pass,setPass] =useState('');
+    const navigate=useNavigate();
+
+    const handleChangePassword =async()=>{
+      axios.post('http://localhost:8000/Reset',{
+        pass,
+      }).then(res=>{
+        alert(res.data.massage);
+        navigate('/login');
+      }).catch(error=>{
+        alert(error.response.data)
+      })
+    }
 
   return (
     <div >
@@ -30,7 +43,7 @@ function Reset() {
             <label htmlFor="">Remember me</label>
               </div>
           </div>
-          <Link to='Login' className='w-full mb-4 text-center text-[18px] mt-6 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-emerald-800 opacity-60 hover:opacity-100 font-bold py-2 transition-colors duration-300' type="submit">Reset</Link>
+          <button onClick={handleChangePassword} className='w-full mb-4 text-center text-[18px] mt-6 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-emerald-800 opacity-60 hover:opacity-100 font-bold py-2 transition-colors duration-300' type="submit">Reset</button>
         </section>
         </div>
     </div>

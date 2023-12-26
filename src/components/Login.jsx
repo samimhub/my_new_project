@@ -1,21 +1,32 @@
-import {useState} from 'react';
+import React, {useState} from 'react';
 import { FaRegUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+
 
 
 export const Login=() => {
   const name ='Login';
   const [email,setEmail] =useState('');
   const [pass,setPass] =useState('');
+  const navigate = useNavigate(); 
 
-  const handleLogin=()=>{
-    axios.get("http://localhost:8000").then((res) => {
-      console.log(res.userDatabase);
+  const handleLogin = async () => {
+
+      axios.post('http://localhost:8000/login', {
+        email,
+        pass,
+      }).then(res => {
+       localStorage.setItem('user',JSON.stringify(res.data));
+        alert(res.data.message)
+        navigate('/dashboard');
+        
+      }).catch(err => {
+        alert(err.response.data);
       })
-
-  }  
+    }
   return (
     <div >
     <div className='bg-slate-800 border-slate-500 rounded-md p-8 shadow-lg backdrop-filter backdrop-blur-sm bg-opacity-30 relative'>
@@ -45,7 +56,7 @@ export const Login=() => {
         </section>
         
         <div className="register-link">
-        <span className='m-4'>Don't have an account?</span><Link className='text-blue-600' to='Register'>Register Here</Link>
+        <span className='m-4'>Don't have an account?</span><Link className='text-blue-600' to='register'>Register Here</Link>
         </div>
         </div>
     </div>
